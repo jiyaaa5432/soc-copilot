@@ -1,21 +1,22 @@
 # SOC Copilot
 
-An MCP (Model Context Protocol) server that lets AI assistants like Claude
-search and summarize security alerts. Status: in progress.
+An MCP (Model Context Protocol) server that exposes security alerts as
+tools, so any MCP client can search and summarize them.
 
-## What works now
-- MCP server in Node.js with three tools: search_alerts, get_alert, alert_summary
-- Read-only access to a SQLite alerts database
-- Input validation on every tool with zod
+## Tools
+- search_alerts: search by keyword and severity
+- get_alert: get one alert by id
+- alert_summary: count alerts by severity
+
+## How it works
+- Node.js server using the MCP SDK
+- Read-only SQLite database, so alerts cannot be changed
+- Every tool validates its input with zod
 
 ## Run it
 1. npm install
-2. node seed.js  (creates alerts.db with 20 made-up sample alerts)
+2. node seed.js (creates alerts.db with 20 sample alerts)
 3. npx @modelcontextprotocol/inspector node server.js
 
 ## Note
 All alerts are sample data made up for this demo.
-
-## Next
-- Express REST API and React dashboard
-- Claude agent that triages alerts using these tools
